@@ -1,4 +1,5 @@
 from django.db import models
+from django.core import RegexValidator
 
 lang_choices = (
         ('ENG', 'English'),
@@ -7,12 +8,11 @@ lang_choices = (
         ('TAM', 'Tamil'),
     )
 
-    expense_choices = (
-        ('ECO', 'Economy'),
-        ('BAS', 'Basic'),
-        ('LUX', 'Luxury'),
-    )
-
+expense_choices = (
+    ('ECO', 'Economy'),
+    ('BAS', 'Basic'),
+    ('LUX', 'Luxury'),
+)
 
 class User(models.Model):
     name = models.CharField(max_length=30)
