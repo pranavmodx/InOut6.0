@@ -12,3 +12,8 @@ def location(request):
     places = Location.objects.all()[:5]
     place_ = serialize('json', places) 
     return JsonResponse({'loc': place_})
+
+def all_guides(request):
+    po = Guide.objects.all()
+    po_ = serialize('json', po)
+    return JsonResponse({'people': po_})
