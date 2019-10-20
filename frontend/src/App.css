@@ -39,13 +39,84 @@
   left: 50%;
   transform: translate(-50%,-50%);
 }
-
+.search h1{
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+}
+.search p{
+  color: white;
+  font-size: 1.5em;
+}
 
 .search input[type=text]::placeholder {
   color: white;
   font-size: 1.2em;
   font-weight: normal;
 }
+.searchResults{
+  width: 70%;
+  border-radius: 25px;
+  margin: 0 auto 0 auto;  
+  background-color: white;
+  color: black;
+}
+
+.searchResults h2{
+  color: black;
+  margin: 0px;
+  padding: 0px;
+}
+.searchResults p{
+  color: black;
+  margin: 0px;
+  padding: 0px;
+}
+.result{
+  display: flex;
+}
+.CityResult{
+  float: left;
+  margin: auto 0 auto 15px;
+}
+.CityResult p{
+  font-size: 0.9em;
+  text-align:left;
+
+}
+.BasicResult{
+  margin-left: auto;
+  order: 2;
+}
+.BasicResult ul{
+  display: flex;
+  justify-content: space-between;
+}
+.BasicResult ul li span{
+  padding: 5px;
+  background-color: white!important;
+  margin-right: 5px;
+  border-radius: 5px;
+  color: black;
+  font-weight: bold;
+}
+.BasicResult ul :nth-child(1){
+  background-color: #43B929;
+}
+.BasicResult ul :nth-child(2){
+  background-color: #B9A129;
+}
+
+
+.BasicResult ul li{
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  list-style-type: none;
+  color: white;
+}
+
+
 @media screen and (max-width: 480px) {
 .search input[type=text]::placeholder {
     color: white;
@@ -53,4 +124,9 @@
     font-weight: normal;
 
   }
+  .BasicResult{
+    transform: scale(0.6);
+    padding-left: 0;
+  }
+
 }
