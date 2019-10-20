@@ -2,67 +2,77 @@ import React, { Component } from 'react'
 // import { render } from "react-dom"
 import _ from "lodash/fp";
 import Fuse from "fuse.js";
+import axios from "axios";
+
 import searchSVG from '../../assets/search.svg'
 import locationSVG from '../../assets/location.svg'
 
-const data = [
-    {
-      name: "Fruit",
-      vals: "magic",
-      typechild: [
-        {
-          color: "#fff",
-          level: 2,
-          name: "Orange",
-          vals: "diet"
-        },
-        {
-          color: "#fff",
-          level: 3,
-          name: "Apple",
-          vals: "health"
-        }
-      ]
-    },
-    {
-      name: "Vegetable",
-      typechild: [
-        {
-          color: "#fff",
-          level: 2,
-          name: "Potato",
-          vals: "recipe"
-        }
-      ]
-    },
-    {
-      name: "Technology",
-      typechild: [
-        {
-          color: "#fff",
-          level: 2,
-          name: "App",
-          vals: ["ipod", "iphone", "apple"]
-        }
-      ]
-    },
-    {
-      name: "Color",
-      typechild: [
-        {
-          color: "#fff",
-          level: 2,
-          name: "Green",
-          vals: ["paiting", "nature", "rain"]
-        }
-      ]
-    }
-];
+// const data = [
+//     {
+//       name: "Fruit",
+//       vals: "magic",
+//       typechild: [
+//         {
+//           color: "#fff",
+//           level: 2,
+//           name: "Orange",
+//           vals: "diet"
+//         },
+//         {
+//           color: "#fff",
+//           level: 3,
+//           name: "Apple",
+//           vals: "health"
+//         }
+//       ]
+//     },
+//     {
+//       name: "Vegetable",
+//       typechild: [
+//         {
+//           color: "#fff",
+//           level: 2,
+//           name: "Potato",
+//           vals: "recipe"
+//         }
+//       ]
+//     },
+//     {
+//       name: "Technology",
+//       typechild: [
+//         {
+//           color: "#fff",
+//           level: 2,
+//           name: "App",
+//           vals: ["ipod", "iphone", "apple"]
+//         }
+//       ]
+//     },
+//     {
+//       name: "Color",
+//       typechild: [
+//         {
+//           color: "#fff",
+//           level: 2,
+//           name: "Green",
+//           vals: ["paiting", "nature", "rain"]
+//         }
+//       ]
+//     }
+// ];
 
 class Search extends Component {
     state = {
         searchVal: "",
-        data: data
+        data: ''
+    }
+
+    componentDidMount() {
+        axios.get(`http://localhost:8000/api/search/`)
+            .then(res => {
+                    console.log(res.data);
+                    this.setState({ data: res.data });
+            });
     }
 
     fuse(e, y) {
@@ -82,13 +92,13 @@ class Search extends Component {
     }
     
     nestedUniq(e) {
-    const res = _.flow(_.flatMap("typechild"), _.values(), _.uniqBy("name"))(e);
-    // THIS will cause an issue IF have two sub-tags with the same name (differing vals). Is this a super rare case? Orange and Orange?
-    // COULD do uniqueBy vals instead?
-    // const err = _.flow(_.flatMap("typechild"), _.values(), _.uniqBy("name"))(e)
-    // res.forEach(el => { el.clickOrder = this.someCounter++})
-    // console.log("err", res);
-    return res;
+        const res = _.flow(_.flatMap("typechild"), _.values(), _.uniqBy("name"))(e);
+        // THIS will cause an issue IF have two sub-tags with the same name (differing vals). Is this a super rare case? Orange and Orange?
+        // COULD do uniqueBy vals instead?
+        // const err = _.flow(_.flatMap("typechild"), _.values(), _.uniqBy("name"))(e)
+        // res.forEach(el => { el.clickOrder = this.someCounter++})
+        // console.log("err", res);
+        return res;
     }
 
     render() {
@@ -96,60 +106,62 @@ class Search extends Component {
         const searchOn = searchVal.length > 0;
 
         let output1;
-        let output2;
 
         if (searchOn && this.fuse(data).length > 0) {
             output1 = this.fuse(data);
-            output2 = this.fuse(data).filter(e => this.fuse(data)).map(r => r.typechild)[0];
         } else if (searchOn && this.fuse(data, 2).length > 0) {
             output1 = this.fuse(data, 2);
-            output2 = this.fuse(this.nestedUniq(data, 2));
         } else if (searchOn && this.fuse(data, 2).length === 0 && this.fuse(data).length === 0) {
             output1 = [{ name: "No Res" }];
-            output2 = [{ name: "No Res" }];
         } 
         else {
             // data.forEach(el => { el.clickOrder = this.someCounter++*30 })
             output1 = data;
-            output2 = this.nestedUniq(data);
         }
 
         return (
-            <div>
-                {/* <div>
-                    <input onChange={e => this.setState({ searchVal: e.target.value })} />
-                    <br />
-                    {output1.map(x => {
-                    return <span key={x.name}>{x.name} </span>;
-                    })}
-                    <br /> <h2>T2</h2>
-                    {output2.map((x, idx) => {
-                    return <span key={idx}>{x.name} </span>;
-                    })}
-                </div> */}
+            <>
+                {/* <input onChange={e => this.setState({ searchVal: e.target.value })} /> */}
                 
                 <div className="search">
                     <h1>Travel Hassel Free</h1>
                     <p>with <strong>PRO</strong> Guides</p>
                     <img className="searchSVG" alt="." src={searchSVG}></img>
-                    <input class="input-field" type="text" placeholder="Where to? eg: Banglore" name="location"></input>
+                    <input 
+                    onChange={e => {
+                            this.setState({ searchVal: e.target.value })
+                        }
+                        } 
+                        className="input-field" type="text" placeholder="Where to? eg: Banglore" name="location"></input>
                     <img className="locationSVG" src={locationSVG} alt="." ></img>
-                    <div className="searchResults">
-                        <div className="result">
-                            <div className="CityResult">
-                                <h2>New Delhi</h2>
-                                <p>India, Asia</p>
-                            </div>
-                            <div className="BasicResult">
-                                <ul>
-                                    <li><span>50</span>Guides</li>
-                                    <li><span>7</span>Packages</li>
-                                </ul>
-                            </div>
+                    { this.state.searchVal ? 
+                        <>
+                        <div className="searchResults">
+                        {output1.map(x => {
+                            return (
+                                // <span key={x.name}>{x.name} </span>
+                                <div className="result">
+                                    <div className="CityResult">
+                                        {/* <h2>{{}}</h2> */}
+                                        {/* <p>{India, Asia}</p> */}
+                                    </div>
+                                    <div className="BasicResult">
+                                        <ul>
+                                            {/* <li><span>{{50}}</span>{{Guides}}</li> */}
+                                            {/* <li><span>{{7}}</span>{{Packages}}</li> */}
+                                        </ul>
+                                    </div>
+                                </div>
+                            );
+                        })}
                         </div>
-                    </div>
+                        </>
+                    :
+                        <>
+                        </>
+                    }
                 </div>
-            </div>
+            </>
         )
     }
 }
