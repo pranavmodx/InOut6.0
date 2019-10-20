@@ -3,32 +3,51 @@ import Star from '../../assets/star.svg'
 import Tick from '../../assets/tick.svg'
 import Cost from '../../assets/cost.svg'
 import IndiaGate from '../../assets/indiagate.png'
-/*import Dp from '../../assets/dp.jpg'*/
+import Dp from '../../assets/dp.png'
 
-
-export default class explore extends Component {
+class Explore extends Component {
     render() {
         return (
-            <div>
-                <div>
+            <div class="ExploreContainer">
+                <div className="ExploreContainerContainer">
+                <div className="left"> 
                     <h1>Popular Guides in New Delhi</h1>
-                    <div>
+                    <div className="card">
+                        <img className="dp" src={Dp}></img>
                         <div>
-                            <img className="dp" src="#"></img>
+                        <div className="Gname">
                             <h1>First Last</h1>
                             <img className="cost" src={Cost}></img>
                         </div>
-                        <p>Languages:<spna>English</spna><spna>Hindi</spna><spna>Malayalam</spna></p>
-                        <div>
-                            <img className="star" src={Star}></img>
-                            <img className="star" src={Star}></img>
-                            <img className="star" src={Star}></img>
-                            <img className="star" src={Star}></img>
-                            <img className="star" src={Star}></img>
+                        <p>Languages:<span>English</span><span>Hindi</span><span>Malayalam</span></p>
+                        <div className="star">
+                            <img src={Star}></img>
+                            <img src={Star}></img>
+                            <img src={Star}></img>
+                            <img src={Star}></img>
+                            <img src={Star}></img>
                         </div>
+                            <p className="Avail">Available!</p>
+
+                        </div>
+                    </div>
+                    <div className="card">
+                        <img className="dp" src={Dp}></img>
                         <div>
-                            <img className="tick" src={Tick}></img>
-                            <p>Available!</p>
+                        <div className="Gname">
+                            <h1>First Last</h1>
+                            <img className="cost" src={Cost}></img>
+                        </div>
+                        <p>Languages:<span>English</span><span>Hindi</span><span>Malayalam</span></p>
+                        <div className="star">
+                            <img src={Star}></img>
+                            <img src={Star}></img>
+                            <img src={Star}></img>
+                            <img src={Star}></img>
+                            <img src={Star}></img>
+                        </div>
+                            <p className="Avail">Available!</p>
+
                         </div>
                     </div>
                 </div>
@@ -53,8 +72,10 @@ export default class explore extends Component {
                         </div>
                     </div>
                 </div>
-                
+                </div>
             </div>
         )
     }
-}
+};
+
+export default Explore;
