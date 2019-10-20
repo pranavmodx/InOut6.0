@@ -116,14 +116,7 @@ class Search extends Component {
 
         return (
             <div>
-                <div className="search">
-                    <h1>Welcome!</h1>
-                    <img className="searchSVG" alt="." src={searchSVG}></img>
-                    <input className="input-field" type="text" placeholder="Where to? eg: Banglore" name="location"></input>
-                    <img className="locationSVG" src={locationSVG} alt="." ></img> 
-                </div>
-
-                <div>
+                {/* <div>
                     <input onChange={e => this.setState({ searchVal: e.target.value })} />
                     <br />
                     {output1.map(x => {
@@ -133,8 +126,29 @@ class Search extends Component {
                     {output2.map((x, idx) => {
                     return <span key={idx}>{x.name} </span>;
                     })}
-                </div>
+                </div> */}
                 
+                <div className="search">
+                    <h1>Travel Hassel Free</h1>
+                    <p>with <strong>PRO</strong> Guides</p>
+                    <img className="searchSVG" alt="." src={searchSVG}></img>
+                    <input class="input-field" type="text" placeholder="Where to? eg: Banglore" name="location"></input>
+                    <img className="locationSVG" src={locationSVG} alt="." ></img>
+                    <div className="searchResults">
+                        <div className="result">
+                            <div className="CityResult">
+                                <h2>New Delhi</h2>
+                                <p>India, Asia</p>
+                            </div>
+                            <div className="BasicResult">
+                                <ul>
+                                    <li><span>50</span>Guides</li>
+                                    <li><span>7</span>Packages</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
