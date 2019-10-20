@@ -116,6 +116,74 @@
   list-style-type: none;
   color: white;
 }
+.ExploreContainer{
+  background-color: white;
+  
+}
+.ExploreContainerContainer{
+  box-shadow: 0px 0px 50px rgba(113, 255, 81, 0.685);
+  border-radius: 20px;
+  margin: 8%;
+  
+  display: flex;
+  justify-content: space-between;
+  padding: 5%;
+}
+.card{
+  display: flex;
+  background: white;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.513);
+  padding: 50px; 
+  border-radius: 20px;
+  transform: scale(0.6);
+  
+}
+.dp{
+  transform: translatey(20px);
+  margin: 10px;
+  width: 200px;
+  height: 200px; 
+}
+.Gname{
+  display: flex;
+  font-size: 1.5em;
+  margin-bottom:0;
+  
+}
+.card p{
+  color: black;
+  font-weight: bold;
+  transform: translateY(-35px);
+}
+.card p span{
+  margin: 0 5px 0 5px;
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+
+}
+.star{
+  float: left;
+  margin-left: 60px;
+  padding: 0;
+  transform: scale(2.5);
+
+}
+
+.Gname img{
+  margin-left: 10px;
+}
+
+.Avail{
+  color: #43B929;
+
+
+}
+.tick{
+  padding: 0;
+  margin: 0;
+}
+
 /*------------------------------------*/
 /*NAV BAR STYLE*/
 
@@ -135,6 +203,7 @@
     width: 100%;
     left:0;
     top:0;
+    background-color: rgba(0, 0, 0, 0.596);
   }
   
   .navbar li.logo,

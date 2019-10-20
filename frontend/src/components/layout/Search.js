@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import '../../App.css'
 // import { render } from "react-dom"
 import _ from "lodash/fp";
 import Fuse from "fuse.js";
