@@ -70,7 +70,7 @@ class Search extends Component {
     componentDidMount() {
         axios.get('http://localhost:8000/api/search')
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 this.setState({ data: res.data });
             })
     }
@@ -90,80 +90,83 @@ class Search extends Component {
         var res = fuse.search(this.state.searchVal);
         return res;
     }
-    
-    nestedUniq(e) {
-        const res = _.flow(_.flatMap("typechild"), _.values(), _.uniqBy("name"))(e);
-        // THIS will cause an issue IF have two sub-tags with the same name (differing vals). Is this a super rare case? Orange and Orange?
-        // COULD do uniqueBy vals instead?
-        // const err = _.flow(_.flatMap("typechild"), _.values(), _.uniqBy("name"))(e)
-        // res.forEach(el => { el.clickOrder = this.someCounter++})
-        // console.log("err", res);
-        return res;
-    }
 
     render() {
         const { searchVal, data } = this.state;
-        const searchOn = searchVal.length > 0;
+        // const searchOn = searchVal.length > 0;
 
-        let output1;
+        // let output1 = this.fuse(data.loc);
+        const output1 = data.loc;
+        console.log(output1);
 
-        if (searchOn && this.fuse(data).length > 0) {
-            output1 = this.fuse(data);
-        } else if (searchOn && this.fuse(data, 2).length > 0) {
-            output1 = this.fuse(data, 2);
-        } else if (searchOn && this.fuse(data, 2).length === 0 && this.fuse(data).length === 0) {
-            output1 = [{ name: "No Res" }];
-        } 
-        else {
-            // data.forEach(el => { el.clickOrder = this.someCounter++*30 })
-            output1 = data;
+        {output1 
+            ? 
+                <>
+                    {output1.map(x => {
+                        return(
+                            <h1>{x}</h1>
+                        );
+                    })}
+                </>
+            
+            :
+                <>
+                    <h1>Loading...</h1>
+                </>
         }
+
+        // if (searchOn && this.fuse(data.loc).length > 0) {
+        //     output1 = this.fuse(data.loc);
+        // }
 
         return (
             <>
-                {/* <input onChange={e => this.setState({ searchVal: e.target.value })} /> */}
-                
+                {/* <input onChange={e => this.setState({ searchVal: e.target.value })} /> */}  
                 <div className="search">
                     <h1>Travel Hassel Free</h1>
                     <p>with <strong>PRO</strong> Guides</p>
                     <img className="searchSVG" alt="." src={searchSVG}></img>
                     <input 
-                    onChange={e => {
+                        onChange={e => {
                             this.setState({ searchVal: e.target.value })
-                        }
+                            }
                         } 
-                        className="input-field" type="text" placeholder="Where to? eg: Banglore" name="location"></input>
+                        className="input-field" type="text" placeholder="Where to? eg: Banglore" name="location">
+                    </input>
                     <img className="locationSVG" src={locationSVG} alt="." ></img>
-                    { this.state.searchVal ? 
-                        <>
-                        <div className="searchResults">
-                        {output1.map(x => {
-                            return (
-                                // <span key={x.name}>{x.name} </span>
-                                <div className="result">
-                                    <div className="CityResult">
-                                        {/* <h2>{{}}</h2> */}
-                                        {/* <p>{India, Asia}</p> */}
-                                    </div>
-                                    <div className="BasicResult">
-                                        <ul>
-                                            {/* <li><span>{{50}}</span>{{Guides}}</li> */}
-                                            {/* <li><span>{{7}}</span>{{Packages}}</li> */}
-                                        </ul>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                        </div>
-                        </>
+                            
+                    <div className="searchResults">
+                        
+                    
+                    </div>
                     :
                         <>
+                            <h1>No result</h1>
                         </>
-                    }
                 </div>
             </>
         )
-    }
-}
+}}
 
 export default Search;
+
+
+// {output1.map(x => {
+//     console.log(x);
+//     // <span key={x.name}>{x.name} </span>
+//     return (
+//         <div className="result">
+//         <div className="CityResult">
+//             {/* <h2>{{}}</h2> */}
+//             {/* <p>{India, Asia}</p> */}
+//         </div>
+//         <div className="BasicResult">
+//             <ul>
+//                 {/* <li><span>{{50}}</span>{{Guides}}</li> */}
+//                 {/* <li><span>{{7}}</span>{{Packages}}</li> */}
+//             </ul>
+//         </div>
+//         </div>
+//     );
+// })
+// }
