@@ -57,7 +57,7 @@
 .searchResults{
   width: 70%;
   border-radius: 25px;
-  margin: 0 auto 0 auto;  
+  margin: 15px auto 0 auto;  
   background-color: white;
   color: black;
 }
@@ -78,6 +78,7 @@
 .CityResult{
   float: left;
   margin: auto 0 auto 15px;
+  white-space: nowrap;
 }
 .CityResult p{
   font-size: 0.9em;
@@ -124,9 +125,29 @@
     font-weight: normal;
 
   }
-  .BasicResult{
-    transform: scale(0.6);
-    padding-left: 0;
+  .result{
+    transform: scale(0.8);
   }
+  .BasicResult{
+    transform: scale(0.6) translateX(-60%);
+    padding-left: 0;
+    margin-left: 0;
+  }
+  .searchResults{
+    border-radius: 10px;
+  }
+  .searchResults h2{
+    color: black;
+    margin: 0px;
+    padding: 0px;
+    font-size: 1em;
+    
+  }
+  .CityResult{
+    white-space: nowrap;
+    transform: translateX(-40%);
+    
+  }
+  
 
 }
