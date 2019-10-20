@@ -6,3 +6,6 @@ def Home(request):
     # return render('')
     # obj = Guide.objects.filter(location=<POST>)
     # resp = JsonResponse({'result': obj.content})
+
+def blogAPI(request):
+    places = 
