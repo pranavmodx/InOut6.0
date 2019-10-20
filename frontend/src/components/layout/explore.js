@@ -4,8 +4,7 @@ import Tick from '../../assets/tick.svg'
 import Cost from '../../assets/cost.svg'
 /*import Dp from '../../assets/dp.jpg'*/
 
-
-export default class explore extends Component {
+class Explore extends Component {
     render() {
         return (
             <div>
@@ -17,7 +16,7 @@ export default class explore extends Component {
                         <h1>First Last</h1>
                         <img className="cost" src={Cost}></img>
                         </div>
-                        <p>Languages:<spna>English</spna><spna>Hindi</spna><spna>Malayalam</spna></p>
+                        <p>Languages:<span>English</span><span>Hindi</span><span>Malayalam</span></p>
                         <div>
                             <img className="star" src={Star}></img>
                             <img className="star" src={Star}></img>
@@ -30,7 +29,6 @@ export default class explore extends Component {
                             <p>Available!</p>
                         </div>
                     </div>
-
                 </div>
                 <div>
                 </div>
@@ -38,4 +36,6 @@ export default class explore extends Component {
             </div>
         )
     }
-}
+};
+
+export default Explore;
