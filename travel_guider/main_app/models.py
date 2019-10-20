@@ -14,6 +14,12 @@ expense_choices = (
     ('LUX', 'Luxury'),
 )
 
+class Location(models.Model):
+    name = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    country = models.CharField(max_length=50)
+
+
 class User(models.Model):
     name = models.CharField(max_length=30)
     email = models.EmailField(null=True)
@@ -30,7 +36,7 @@ class Guide(models.Model):
     photo = models.ImageField(blank=True, null=True)
     description = models.TextField()
     no_of_people_handled = models.IntegerField()
-    location = models.CharField(max_length=500, verbose_name='location')
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
     rate_per_hour = models.IntegerField()
     native_language = models.CharField(max_length=3, choices = lang_choices)
 
