@@ -2,3 +2,4 @@ backend_venv
 .vscode
 __pycache__
 .env/
+_autofixture
